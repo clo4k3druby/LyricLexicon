@@ -2,40 +2,49 @@ import { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
+
 function App() {
   const [songTitle, setSongTitle] = useState('');
   const [artistName, setArtistName] = useState('');
   const [results, setResults] = useState([]);
   const [stats, setStats] = useState(null);
+const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    try {
-      const response = await axios.post(
-        'https://lyriclexicon-api.onrender.com/analyze',
-        {
-          songTitle,
-          artistName,
-        }
-      );
+  setLoading(true);
 
-      const sortedByFrequency = [...response.data.results]
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 10);
+  try {
+    const response = await axios.post(
+      'https://lyriclexicon-api.onrender.com/analyze',
+      {
+        songTitle,
+        artistName
+      }
+    );
 
-      setResults(response.data.results);
+    const sortedByFrequency = [...response.data.results]
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
 
-      setStats({
-        totalWords: response.data.totalWords,
-        uniqueWords: response.data.uniqueWords,
-        topWords: sortedByFrequency,
-      });
-    } catch (error) {
-      alert('Lyrics not found.');
-      console.error(error);
-    }
-  };
+    setResults(response.data.results);
+
+    setStats({
+      totalWords: response.data.totalWords,
+      uniqueWords: response.data.uniqueWords,
+      topWords: sortedByFrequency
+    });
+
+  } catch (error) {
+    alert('Lyrics not found.');
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+      
 
   return (
     <div className="container">
@@ -63,9 +72,9 @@ function App() {
             required
           />
 
-          <button type="submit">
-            Analyze Lyrics
-          </button>
+          <button type="submit" disabled={loading}>
+  {loading ? 'Analyzing...' : 'Analyze Lyrics'}
+</button>
         </form>
       </div>
 
@@ -118,6 +127,10 @@ function App() {
           </div>
         </>
       )}
+
+<footer>
+  Made with ❤️ using React, Express, and Lyrics.ovh
+</footer>
     </div>
   );
 }
