@@ -1,7 +1,14 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #121212;
+  background:
+    radial-gradient(
+      circle at top,
+      #1a1a1a,
+      #0b0b0b 60%
+    );
+
+  min-height: 100vh;
   color: white;
 }
 
@@ -12,22 +19,62 @@ body {
 }
 
 .hero {
-  background: linear-gradient(135deg, #1DB954, #191414);
-  border-radius: 20px;
-  padding: 50px;
+  background: linear-gradient(
+    180deg,
+    #0d0d0d,
+    #111111
+  );
+
+  border-radius: 30px;
+  padding: 60px;
   text-align: center;
-  margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  margin-bottom: 40px;
+
+  box-shadow:
+    0 0 50px rgba(0,0,0,0.7),
+    inset 0 0 30px rgba(29,185,84,0.05);
 }
 
 .hero h1 {
   margin: 0;
-  font-size: 3rem;
+  font-size: 5rem;
+  font-family: 'Creepster', cursive;
+  color: white;
+
+  text-shadow:
+    0 0 10px rgba(29,185,84,0.7),
+    0 0 30px rgba(29,185,84,0.4);
+}
+
+.subtitle-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .subtitle {
-  margin-top: 10px;
-  color: rgba(255,255,255,0.8);
+  font-family: 'Creepster', cursive;
+  font-size: 2rem;
+  color: #8dff8d;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  padding: 25px 60px;
+
+  border-radius: 999px;
+
+  border: 2px solid rgba(29, 185, 84, 0.3);
+
+  box-shadow:
+    0 0 20px rgba(29, 185, 84, 0.2),
+    inset 0 0 20px rgba(29, 185, 84, 0.05);
+
+  text-align: center;
+
+  max-width: 900px;
+
+  margin: 0;
 }
 
 .search-form {
@@ -46,9 +93,6 @@ body {
   color: white;
 }
 
-.search-form input::placeholder {
-  color: #b3b3b3;
-}
 
 .search-form button {
   padding: 15px;
@@ -73,13 +117,6 @@ body {
   margin: 30px 0;
 }
 
-.stat-card {
-  flex: 1;
-  background: #181818;
-  border-radius: 20px;
-  padding: 25px;
-  text-align: center;
-}
 
 .stat-card h2 {
   margin: 0;
@@ -87,9 +124,18 @@ body {
   font-size: 2rem;
 }
 
-.stat-card p {
-  margin-top: 10px;
-  color: #b3b3b3;
+.stat-card {
+  flex: 1;
+  background: #181818;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
 }
 
 .section {
@@ -97,6 +143,12 @@ body {
   padding: 25px;
   border-radius: 20px;
   margin-bottom: 25px;
+
+  transition: transform 0.2s ease;
+}
+
+.section:hover {
+  transform: translateY(-5px);
 }
 
 .section h3 {
@@ -145,7 +197,12 @@ tbody tr:hover {
   }
 
   .hero h1 {
-    font-size: 2rem;
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    padding: 20px 30px;
   }
 }
 
@@ -156,16 +213,7 @@ tbody tr:hover {
 
 .section,
 .stat-card {
-  flex: 1;
-  background: #181818;
-  border-radius: 20px;
-  padding: 25px;
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
+  animation: fadeIn 0.5s ease;
 }
 
 @keyframes fadeIn {
@@ -178,11 +226,11 @@ tbody tr:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
 
-  footer {
+footer {
   text-align: center;
   margin-top: 40px;
   color: #888;
   font-size: 0.9rem;
-  }
 }
